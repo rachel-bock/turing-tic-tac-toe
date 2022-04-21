@@ -24,6 +24,11 @@ main {
   width: 200px;
 }
 
+.board-square-unused:hover {
+  cursor: pointer;
+  background: lavenderblush;
+}
+
 .game-board {
   display: grid;
   align-items: center;
