@@ -23,6 +23,8 @@ class Game {
     this.checkDraw();
     if (this.winner) {
       this.showGameOver();
+    } else {
+      this.updatePlayerTurn();
     }
   }
 
@@ -46,25 +48,18 @@ class Game {
   makeMove(squareNumber) {
     if (!this.gameBoard[squareNumber]) {
       this.gameBoard[squareNumber] = this.currentPlayer;
+      this.checkForWinner();
+      return true;
     } else {
       console.log(`That square is already taken.`);
-      return; 
+      return false; 
     }
-    if (this.currentPlayer === 'X') {
-      this.currentPlayer = 'O';
-    } else {
-      this.currentPlayer = 'X';
-    }
-    this.checkForWinner();
-    // if(this.winner) {
-    //   this.setupGameBoard();
-    // }
-    this.updatePlayerTurn();
   }
 
   setupGameBoard() {
     // method will clear this.gameBoard array
-    // Set who goes first on the gameBoard array.
+    // Reset the array then
+    // set who goes first on the gameBoard array.
     if (this.gameBoard[0] === 'X') {
       this.gameBoard[0] = 'O';
     } else {
@@ -74,7 +69,6 @@ class Game {
       this.gameBoard[i] = null;
     }
     this.currentPlayer = this.gameBoard[0];
-    this.updatePlayerTurn();
   }
 
   showGameOver() {
@@ -82,18 +76,23 @@ class Game {
     // declare it is a draw if that is the case.
     if (this.winner === 'X') {
       // Report back to user who won the game.
-      console.log(`${this.winner} won!`);
       this.firstPlayer.increaseWins();
+      return `${this.winner} won!`;
     } else if (this.winner === 'O') {
-      console.log(`${this.winner} won!`);
       this.secondPlayer.increaseWins();
+      return `${this.winner} won!`;
     } else if (this.winner === 'Draw') {
-      console.log(`It's a draw!`);
+      return `It's a draw!`;
     }
-    this.setupGameBoard();
+    setTimeout(this.setupGameBoard, 5000);
   }
 
   updatePlayerTurn() {
+    if (this.currentPlayer === 'X') {
+      this.currentPlayer = 'O';
+    } else {
+      this.currentPlayer = 'X';
+    }
     console.log(`It's ${this.currentPlayer}'s turn!`);
   }
 }
