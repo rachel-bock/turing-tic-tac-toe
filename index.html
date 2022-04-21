@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Whisper&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" > 
+  </head>
+  <body>
+    <main>
+      <section class="player">
+        Player One
+        <hr>
+        Wins: <span class="player-one-wins">0</span>
+        <hr>
+        Current Token: <span class="player-one-token">X</span>
+      </section>
+      <section class="middle">
+        <section class="heading">
+          It's <span class="current-player">X</span>'s Turn!
+        </section>
+        <Section class="game-board">
+          <div id="one" class="board-square"></div>
+          <div id="two" class="board-square"></div>
+          <div id="three" class="board-square"></div>
+          <div id="four" class="board-square"></div>
+          <div id="five" class="board-square"></div>
+          <div id="six" class="board-square"></div>
+          <div id="seven" class="board-square"></div>
+          <div id="eight" class="board-square"></div>
+          <div id="nine" class="board-square"></div>
+        </Section>
+      </section>
+      <section class="player">
+        Player Two
+        <hr>
+        Wins: <span class="player-two-wins">0</span>
+        <hr>
+        Current Token: <span class="player-two-token">O</span>
+      </section>
+    </main>
+    <script src="player.js"></script> 
+    <script src="game.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
