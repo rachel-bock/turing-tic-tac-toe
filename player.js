@@ -7,6 +7,11 @@ class Player {
 
   increaseWins() {
     this.wins += 1;
+    if (this.wins === 1) {
+      console.log(`${this.token} has won ${this.wins} time.`);  
+    } else {
+      console.log(`${this.token} has won ${this.wins} times.`);
+    }
   }
 }
 
