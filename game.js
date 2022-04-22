@@ -11,6 +11,14 @@ class Game {
     this.winner = null;
   }
 
+  checkGameOver() {
+    if (this.gameOver && this.winner === 'X') {
+      this.playerX.wins += 1;
+    } else if (this.gameOver && this.winner === 'O') {
+      this.playerO.wins += 1;
+    }
+  }
+
   resetGame() {
     this.gameBoard = new Array(10);
     this.gameOver = false;
