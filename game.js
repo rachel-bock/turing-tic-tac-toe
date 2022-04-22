@@ -16,6 +16,12 @@ class Game {
     }
   }
 
+  makeMove(squareNumber) {
+    if (!this.gameBoard[squareNumber]) {
+      this.gameBoard[squareNumber] = this.currentPlayer;
+    } 
+  }
+
   resetGame() {
     this.gameBoard = new Array(10);
     this.gameOver = false;
