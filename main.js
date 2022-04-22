@@ -2,7 +2,6 @@
 var game = new Game();
 
 // QUERY SELECTORS
-var currentPlayer = document.querySelector('.current-player');
 var gameBoard = document.querySelector('.game-board');
 var heading = document.querySelector('.heading');
 var middleSection = document.querySelector('.middle');
@@ -32,6 +31,7 @@ function checkWinningCombinations() {
   game.checkThreeInARow(game.gameBoard[3], game.gameBoard[6], game.gameBoard[9]);
   game.checkThreeInARow(game.gameBoard[3], game.gameBoard[5], game.gameBoard[7]);
   game.checkThreeInARow(game.gameBoard[1], game.gameBoard[5], game.gameBoard[9]);
+  game.checkForDraw();
   if (game.gameOver) {
     game.updateTotalWins();
   }
@@ -71,11 +71,15 @@ function selectSquare(event) {
         break;
     }
     checkWinningCombinations();
-  }
-  if (game.gameOver){
+  } 
+  if (game.gameOver) {
     playerOneWins.innerText = game.playerX.wins;
     playerTwoWins.innerText = game.playerO.wins;
-    heading.innerHTML = `${game.winner} won!`;
+    if (game.winner === 'Draw') {
+      heading.innerHTML = `It's a draw!`;
+    } else {
+      heading.innerHTML = `${game.winner} won!`;
+    }  
     setTimeout(resetGameBoard, 3000);  
   }
 }
@@ -91,12 +95,11 @@ function resetGameBoard() {
   squareSeven.innerText = '';
   squareEight.innerText = '';
   squareNine.innerText = '';
-  heading.innerHTML = `
-    It's <span class="current-player">${game.currentPlayer}</span>'s Turn!`
+  heading.innerText = `It's ${game.currentPlayer}'s Turn!`
 }
 
 function updateSquare(squareNum) {
-  if (game.gameBoard[squareNum]!== 'X' || game.gameBoard[squareNum] !== 'O') {
+  if (game.gameBoard[squareNum]!== 'X' && game.gameBoard[squareNum] !== 'O') {
     switch (squareNum) {
       case 1:
         game.makeMove(1);
@@ -138,6 +141,6 @@ function updateSquare(squareNum) {
         break;
     }
     game.updatePlayer();
-    currentPlayer.innerText = game.currentPlayer;
+    heading.innerText = `It's ${game.currentPlayer}'s Turn!`;
   }
 }

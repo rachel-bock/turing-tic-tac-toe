@@ -9,6 +9,16 @@ class Game {
     this.winner = null;
   }
 
+  checkForDraw() {
+    for (var i = 1; i < 10; i++) {
+      if (!this.gameBoard[i]) {
+        return;
+      }
+    }
+    this.winner = 'Draw';
+    this.gameOver = true;
+  }
+
   checkThreeInARow(square1, square2, square3) {
     if (square1 === square2 && square2 === square3 && square1 === 'X') {
       this.winner = square1;
