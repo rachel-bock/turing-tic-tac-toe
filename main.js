@@ -25,7 +25,7 @@ function renderWinner() {
 
 function selectSquare(event) {
   var square = document.querySelector(`#${event.target.id}`);
-  // square.classList.remove('board-square-unused');
+  var winningHeadingText = '';
   switch (event.target.id) {
     case 'one':
       var move = ourGame.makeMove(1);
@@ -60,8 +60,9 @@ function selectSquare(event) {
   console.log(move, '<<< move');
   if(move) {
     square.innerText = ourGame.currentPlayer;
-    
-  }
-  
+    winningHeadingText = ourGame.showGameOver();
+    ourGame.updatePlayerTurn();
+    renderHeading();
+  }  
 }
 

@@ -23,8 +23,6 @@ class Game {
     this.checkDraw();
     if (this.winner) {
       this.showGameOver();
-    } else {
-      this.updatePlayerTurn();
     }
   }
 
@@ -42,7 +40,8 @@ class Game {
         return;
       }
     }
-    return this.winner = 'Draw';
+    this.winner = 'Draw'
+    return;
   }
 
   makeMove(squareNumber) {
@@ -74,7 +73,10 @@ class Game {
   showGameOver() {
     // method will update the screen to show the winner of the game or 
     // declare it is a draw if that is the case.
-    if (this.winner === 'X') {
+    if (!this.winner) {
+      console.log(this.winner, '<<< this.winner');
+      return;
+    } else if (this.winner === 'X') {
       // Report back to user who won the game.
       this.firstPlayer.increaseWins();
       return `${this.winner} won!`;
@@ -83,8 +85,8 @@ class Game {
       return `${this.winner} won!`;
     } else if (this.winner === 'Draw') {
       return `It's a draw!`;
-    }
-    setTimeout(this.setupGameBoard, 5000);
+    } 
+    // setTimeout(this.setupGameBoard, 5000);
   }
 
   updatePlayerTurn() {
