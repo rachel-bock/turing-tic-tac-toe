@@ -23,6 +23,7 @@ gameBoard.addEventListener('click', selectSquare);
 
 // FUNCTIONS
 function checkWinningCombinations() {
+  game.checkForDraw();
   game.checkThreeInARow(game.gameBoard[1], game.gameBoard[2], game.gameBoard[3]);
   game.checkThreeInARow(game.gameBoard[4], game.gameBoard[5], game.gameBoard[6]);
   game.checkThreeInARow(game.gameBoard[7], game.gameBoard[8], game.gameBoard[9]);
@@ -31,7 +32,6 @@ function checkWinningCombinations() {
   game.checkThreeInARow(game.gameBoard[3], game.gameBoard[6], game.gameBoard[9]);
   game.checkThreeInARow(game.gameBoard[3], game.gameBoard[5], game.gameBoard[7]);
   game.checkThreeInARow(game.gameBoard[1], game.gameBoard[5], game.gameBoard[9]);
-  game.checkForDraw();
   if (game.gameOver) {
     game.updateTotalWins();
   }
@@ -80,7 +80,8 @@ function selectSquare(event) {
     } else {
       heading.innerHTML = `${game.winner} won!`;
     }  
-    setTimeout(resetGameBoard, 3000);  
+    gameBoard.removeEventListener('click', selectSquare);
+    setTimeout(resetGameBoard, 4000);  
   }
 }
 
@@ -96,6 +97,7 @@ function resetGameBoard() {
   squareEight.innerText = '';
   squareNine.innerText = '';
   heading.innerText = `It's ${game.currentPlayer}'s Turn!`
+  gameBoard.addEventListener('click', selectSquare);
 }
 
 function updateSquare(squareNum) {
