@@ -13,7 +13,13 @@ class Game {
 
 
 
-
+  updatePlayer() {
+    if (this.currentPlayer === 'X') {
+      this.currentPlayer = 'O';
+    } else {
+      this.currentPlayer = 'X';
+    }
+  }
 }
 
 module.exports = Game;
