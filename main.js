@@ -32,69 +32,71 @@ function checkWinningCombinations() {
   game.checkThreeInARow(game.gameBoard[3], game.gameBoard[6], game.gameBoard[9]);
   game.checkThreeInARow(game.gameBoard[3], game.gameBoard[5], game.gameBoard[7]);
   game.checkThreeInARow(game.gameBoard[1], game.gameBoard[5], game.gameBoard[9]);
+  if (game.gameOver) {
+    game.updateTotalWins();
+  }
 }
 
 function selectSquare(event) {
-  switch (event.target.id) {
-    case 'one':
-      updateSquare(1);
-      break;
-    case 'two':
-      updateSquare(2);
-      break;
-    case 'three':
-      updateSquare(3);
-      break;
-    case 'four':
-      updateSquare(4);
-      break;
-    case 'five':
-      updateSquare(5);
-      break;
-    case 'six':
-      updateSquare(6);
-      break;
-    case 'seven':
-      updateSquare(7);
-      break;
-    case 'eight':
-      updateSquare(8);
-      break;
-    case 'nine':
-      updateSquare(9);
-      break;
-    default:
-      break;
+  if (!game.gameOver){
+    switch (event.target.id) {
+      case 'one':
+        updateSquare(1);
+        break;
+      case 'two':
+        updateSquare(2);
+        break;
+      case 'three':
+        updateSquare(3);
+        break;
+      case 'four':
+        updateSquare(4);
+        break;
+      case 'five':
+        updateSquare(5);
+        break;
+      case 'six':
+        updateSquare(6);
+        break;
+      case 'seven':
+        updateSquare(7);
+        break;
+      case 'eight':
+        updateSquare(8);
+        break;
+      case 'nine':
+        updateSquare(9);
+        break;
+      default:
+        break;
+    }
+    checkWinningCombinations();
   }
-  checkWinningCombinations();
-  if(game.gameOver) {
-    game.updateTotalWins();
+  if (game.gameOver){
     playerOneWins.innerText = game.playerX.wins;
     playerTwoWins.innerText = game.playerO.wins;
     heading.innerHTML = `${game.winner} won!`;
-    setTimeout(resetGameBoard, 5000);
+    setTimeout(resetGameBoard, 3000);  
   }
 }
 
 function resetGameBoard() {
   game.resetGame();
-  gameBoard.innerHTML = `
-    <div id="one" class="board-square"></div>
-    <div id="two" class="board-square"></div>
-    <div id="three" class="board-square"></div>
-    <div id="four" class="board-square"></div>
-    <div id="five" class="board-square"></div>
-    <div id="six" class="board-square"></div>
-    <div id="seven" class="board-square"></div>
-    <div id="eight" class="board-square"></div>
-    <div id="nine" class="board-square"></div>`
+  squareOne.innerText = '';
+  squareTwo.innerText = '';
+  squareThree.innerText = '';
+  squareFour.innerText = '';
+  squareFive.innerText = '';
+  squareSix.innerText = '';
+  squareSeven.innerText = '';
+  squareEight.innerText = '';
+  squareNine.innerText = '';
   heading.innerHTML = `
-    It's <span class="current-player">${game.playsFirst}</span>'s Turn!`
+    It's <span class="current-player">${game.currentPlayer}</span>'s Turn!`
 }
 
 function updateSquare(squareNum) {
-  console.log(squareNum, '<<< squareNum');
-  if (!game.gameBoard[squareNum]) {
+  if (game.gameBoard[squareNum]!== 'X' || game.gameBoard[squareNum] !== 'O') {
     switch (squareNum) {
       case 1:
         game.makeMove(1);
@@ -135,7 +137,6 @@ function updateSquare(squareNum) {
       default:
         break;
     }
-    console.log(game.gameBoard[squareNum], "<<< GameBoard at square");
     game.updatePlayer();
     currentPlayer.innerText = game.currentPlayer;
   }
