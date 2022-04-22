@@ -11,7 +11,17 @@ class Game {
     this.winner = null;
   }
 
-
+  resetGame() {
+    this.gameBoard = new Array(10);
+    this.gameOver = false;
+    if (this.playsFirst === 'X') {
+      this.playsFirst = 'O';
+    } else {
+      this.playsFirst = 'X';
+    }
+    this.currentPlayer = this.playsFirst;
+    this.winner = null;
+  }
 
   updatePlayer() {
     if (this.currentPlayer === 'X') {
