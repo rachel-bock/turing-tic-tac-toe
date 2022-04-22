@@ -16,7 +16,7 @@ function selectSquare(event) {
   
 }
 
-function setupGameBoard() {
+function resetGameBoard() {
   middleSection.innerHTML = `
   <section class="heading">
     It's <span class="current-player">${game.playsFirst}</span>'s Turn!
