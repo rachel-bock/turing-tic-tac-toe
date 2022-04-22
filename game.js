@@ -1,5 +1,3 @@
-const Player = require("./player");
-
 class Game {
   constructor() {
     this.currentPlayer = 'X';
@@ -9,14 +7,6 @@ class Game {
     this.playerX = new Player(1, 'X');
     this.playsFirst = 'X';
     this.winner = null;
-  }
-
-  checkGameOver() {
-    if (this.gameOver && this.winner === 'X') {
-      this.playerX.wins += 1;
-    } else if (this.gameOver && this.winner === 'O') {
-      this.playerO.wins += 1;
-    }
   }
 
   checkThreeInARow(square1, square2, square3) {
@@ -43,6 +33,14 @@ class Game {
       this.currentPlayer = 'O';
     } else {
       this.currentPlayer = 'X';
+    }
+  }
+
+  updateTotalWins() {
+    if (this.gameOver && this.winner === 'X') {
+      this.playerX.increaseWins();
+    } else if (this.gameOver && this.winner === 'O') {
+      this.playerO.increaseWins();
     }
   }
 }
