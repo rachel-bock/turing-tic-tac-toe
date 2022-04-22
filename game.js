@@ -19,6 +19,13 @@ class Game {
     }
   }
 
+  checkThreeInARow(square1, square2, square3) {
+    if (square1 === square2 && square2 === square3) {
+      this.winner = square1;
+      this.gameOver = true;
+    }
+  }
+
   resetGame() {
     this.gameBoard = new Array(10);
     this.gameOver = false;
