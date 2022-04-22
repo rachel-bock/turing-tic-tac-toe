@@ -23,7 +23,16 @@ var squareNine = document.querySelector('#nine');
 gameBoard.addEventListener('click', selectSquare);
 
 // FUNCTIONS
-
+function checkWinningCombinations() {
+  game.checkThreeInARow(game.gameBoard[1], game.gameBoard[2], game.gameBoard[3]);
+  game.checkThreeInARow(game.gameBoard[4], game.gameBoard[5], game.gameBoard[6]);
+  game.checkThreeInARow(game.gameBoard[7], game.gameBoard[8], game.gameBoard[9]);
+  game.checkThreeInARow(game.gameBoard[1], game.gameBoard[4], game.gameBoard[7]);
+  game.checkThreeInARow(game.gameBoard[2], game.gameBoard[5], game.gameBoard[8]);
+  game.checkThreeInARow(game.gameBoard[3], game.gameBoard[6], game.gameBoard[9]);
+  game.checkThreeInARow(game.gameBoard[3], game.gameBoard[5], game.gameBoard[7]);
+  game.checkThreeInARow(game.gameBoard[1], game.gameBoard[5], game.gameBoard[9]);
+}
 
 function selectSquare(event) {
   switch (event.target.id) {
@@ -57,15 +66,19 @@ function selectSquare(event) {
     default:
       break;
   }
-  
+  checkWinningCombinations();
+  if(game.gameOver) {
+    game.updateTotalWins();
+    playerOneWins.innerText = game.playerX.wins;
+    playerTwoWins.innerText = game.playerO.wins;
+    heading.innerHTML = `${game.winner} won!`;
+    setTimeout(resetGameBoard, 5000);
+  }
 }
 
 function resetGameBoard() {
-  middleSection.innerHTML = `
-  <section class="heading">
-    It's <span class="current-player">${game.playsFirst}</span>'s Turn!
-  </section>
-  <section class="game-board">
+  game.resetGame();
+  gameBoard.innerHTML = `
     <div id="one" class="board-square"></div>
     <div id="two" class="board-square"></div>
     <div id="three" class="board-square"></div>
@@ -74,8 +87,9 @@ function resetGameBoard() {
     <div id="six" class="board-square"></div>
     <div id="seven" class="board-square"></div>
     <div id="eight" class="board-square"></div>
-    <div id="nine" class="board-square"></div>
-  </section>`
+    <div id="nine" class="board-square"></div>`
+  heading.innerHTML = `
+    It's <span class="current-player">${game.playsFirst}</span>'s Turn!`
 }
 
 function updateSquare(squareNum) {

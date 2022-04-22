@@ -10,7 +10,10 @@ class Game {
   }
 
   checkThreeInARow(square1, square2, square3) {
-    if (square1 === square2 && square2 === square3) {
+    if (square1 === square2 && square2 === square3 && square1 === 'X') {
+      this.winner = square1;
+      this.gameOver = true;
+    } else if (square1 === square2 && square2 === square3 && square1 === 'O') {
       this.winner = square1;
       this.gameOver = true;
     }
