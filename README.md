@@ -1,4 +1,4 @@
-# IdeaBox
+# Tic-Tac-Toe
 
 ## Table of Contents
 - [Introduction](#introduction)
