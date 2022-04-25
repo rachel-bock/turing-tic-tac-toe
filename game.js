@@ -29,6 +29,21 @@ class Game {
     }
   }
 
+  checkWinningCombinations() {
+    this.checkForDraw();
+    this.checkThreeInARow(this.gameBoard[1], this.gameBoard[2], this.gameBoard[3]);
+    this.checkThreeInARow(this.gameBoard[4], this.gameBoard[5], this.gameBoard[6]);
+    this.checkThreeInARow(this.gameBoard[7], this.gameBoard[8], this.gameBoard[9]);
+    this.checkThreeInARow(this.gameBoard[1], this.gameBoard[4], this.gameBoard[7]);
+    this.checkThreeInARow(this.gameBoard[2], this.gameBoard[5], this.gameBoard[8]);
+    this.checkThreeInARow(this.gameBoard[3], this.gameBoard[6], this.gameBoard[9]);
+    this.checkThreeInARow(this.gameBoard[3], this.gameBoard[5], this.gameBoard[7]);
+    this.checkThreeInARow(this.gameBoard[1], this.gameBoard[5], this.gameBoard[9]);
+    if (this.gameOver) {
+      this.updateTotalWins();
+    }
+  }
+  
   makeMove(squareNumber) {
     if (!this.gameBoard[squareNumber]) {
       this.gameBoard[squareNumber] = this.currentPlayer;
