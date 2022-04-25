@@ -22,21 +22,6 @@ var squareNine = document.querySelector('#nine');
 gameBoard.addEventListener('click', selectSquare);
 
 // FUNCTIONS
-function checkWinningCombinations() {
-  game.checkForDraw();
-  game.checkThreeInARow(game.gameBoard[1], game.gameBoard[2], game.gameBoard[3]);
-  game.checkThreeInARow(game.gameBoard[4], game.gameBoard[5], game.gameBoard[6]);
-  game.checkThreeInARow(game.gameBoard[7], game.gameBoard[8], game.gameBoard[9]);
-  game.checkThreeInARow(game.gameBoard[1], game.gameBoard[4], game.gameBoard[7]);
-  game.checkThreeInARow(game.gameBoard[2], game.gameBoard[5], game.gameBoard[8]);
-  game.checkThreeInARow(game.gameBoard[3], game.gameBoard[6], game.gameBoard[9]);
-  game.checkThreeInARow(game.gameBoard[3], game.gameBoard[5], game.gameBoard[7]);
-  game.checkThreeInARow(game.gameBoard[1], game.gameBoard[5], game.gameBoard[9]);
-  if (game.gameOver) {
-    game.updateTotalWins();
-  }
-}
-
 function selectSquare(event) {
   if (!game.gameOver){
     switch (event.target.id) {
@@ -70,7 +55,7 @@ function selectSquare(event) {
       default:
         break;
     }
-    checkWinningCombinations();
+    game.checkWinningCombinations();
   } 
   if (game.gameOver) {
     playerOneWins.innerText = game.playerX.wins;
